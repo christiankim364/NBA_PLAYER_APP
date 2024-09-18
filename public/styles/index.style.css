@@ -1,0 +1,211 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  margin-top: 100px;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+
+}
+a {
+  text-decoration: none;
+  color: #002B5C; /* Dark blue for links */
+}
+
+/* Hero Section */
+.hero-section {
+  background-image: url('../images/basketball-hero-bg.jpg'); /* Adjust the path to make sure it's correct */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  position: relative;
+  height: 400px; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-button {
+  background-color: #ff4500;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e63900;
+}
+
+
+.background-container {
+  padding: 40px 0;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.fl-column,
+.fr-column,
+.fl-column2,
+.fr-column2 {
+  min-width: 50%;
+}
+
+.same-size-image {
+  max-width: 90%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 15px;
+}
+
+.who-we-are {
+  line-height: 1.5;
+}
+
+.learn-more {
+  border: none;
+  background-color: #D50032; /* NBA Red */
+  color: white;
+  width: 180px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.learn-more:hover {
+  background-color: #BA0C2F; /* Darker red for hover */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.gray-container {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.middle {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.what-we-offer {
+  color: rgb(74, 154, 245);
+}
+
+.flex-row2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+  justify-content: space-between;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.flex-column {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+
+.para-top {
+  font-size: 20px;
+  margin-top: 30px;
+  border-top: 2px solid black;
+  width: 300px;
+  font-family: Bradley Hand (cursive);
+  padding-top: 20px;
+}
+
+.para-bottom {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 4px solid black;
+  width: 300px;
+  text-align: center;
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+.pictures {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.learn-service a {
+  color: rgb(74, 154, 245);
+  font-weight: bold;
+}
+
+.learn-service a:hover {
+  color: rgb(44, 124, 215);
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablets */
+@media (min-width: 767px) and (max-width: 1330px) {
+  .fl-column, .fr-column, .fl-column2, .fr-column2 {
+    min-width: 80%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .flex-row2 {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 767px) {
+  .fl-column2 {
+    order: 1;
+  }
+  .fl-column2 {
+    order: 2;
+  }
+  .same-size-image {
+    margin: 0 auto;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .flex-row2 {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

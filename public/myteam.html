@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My NBA Team</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/header.style.css">
+  <link rel="stylesheet" href="styles/footer.style.css">
+  <script src="js/header.code.js"></script>
+  <script src="js/footer.code.js"></script>
+
+  <style>
+    body{
+      margin-top: 150px;
+    }
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+    }
+  </style>
+
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header"></div>
+
+    <h1 class="text-center my-4">My NBA Team</h1>
+  <div class="container">
+    <div class="row justify-content-center mb-5" id="js-my-team"></div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script>
+    // Function to load team data from localStorage and display it
+    function loadMyTeam() {
+      const team = JSON.parse(localStorage.getItem('team')) || [];
+      const teamContainer = document.getElementById('js-my-team');
+      let teamHTML = '';
+
+      if (team.length === 0) {
+        teamHTML = '<p class="text-center">Your team is empty. Go back and add some players!</p>';
+      } else {
+        for (let i = 0; i < team.length; i++) {
+          const player = team[i];
+
+          // Handle cases where certain stats might not exist
+          const threePointPercent = player.TP === null ? 'Did not exist for players\' era' : (player.TP * 100).toFixed(2) + ' %';
+          const steals = player.STL === null ? 'Record of steals did not exist for players\' era' : player.STL;
+          const blocks = player.BLK === null ? 'Record of blocks did not exist for players\' era' : player.BLK;
+
+          teamHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+              <div class="card h-100 d-flex flex-column">
+                <img class="card-img-top" src="${player.img}" alt="Card image cap">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${player.Player}</h5>
+                  <p class="card-text">From: ${player.start_year} To: ${player.end_year}</p>
+                  <p class="card-text">Points: ${player.PTS}</p>
+                  <p class="card-text">Rebounds: ${player.TRB}</p>
+                  <p class="card-text">Assists: ${player.AST}</p>
+                  <p class="card-text">Steals: ${steals}</p>
+                  <p class="card-text">Blocks: ${blocks}</p>
+                  <p class="card-text">Field-Goal%: ${(player.FG * 100).toFixed(2)} %</p>
+                  <p class="card-text">3-Point%: ${threePointPercent}</p>
+                  <p class="card-text">Free Throw %: ${(player.FT * 100).toFixed(2)} %</p>
+                  <button class="btn btn-danger mt-auto remove-from-team-btn" data-id="${player.id}">Remove Player</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+      teamContainer.innerHTML = teamHTML;
+
+      // Add event listeners to "Remove Player" buttons
+      const removeFromTeamButtons = document.getElementsByClassName('remove-from-team-btn');
+      for (let i = 0; i < removeFromTeamButtons.length; i++) {
+        removeFromTeamButtons[i].addEventListener('click', removeFromTeam);
+      }
+    }
+
+    // Function to remove a player from the team
+    function removeFromTeam(event) {
+      const playerId = event.target.getAttribute('data-id');
+      let team = JSON.parse(localStorage.getItem('team')) || [];
+      const updatedTeam = team.filter(player => player.id != playerId);
+
+      localStorage.setItem('team', JSON.stringify(updatedTeam));
+      loadMyTeam();
+    }
+
+    document.addEventListener('DOMContentLoaded', loadMyTeam);
+  </script>
+</body>
+</html>

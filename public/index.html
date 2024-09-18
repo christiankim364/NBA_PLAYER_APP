@@ -3,93 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top 75 NBA Players</title>
-  <!-- Bootstrap CSS v4.1.3 -->
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/index.style.css">  
+   <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/header.style.css">
+  <link rel="stylesheet" href="styles/footer.style.css">
+  <script src="js/header.code.js"></script>
+  <script src="js/footer.code.js"></script>
 
-  <style>
-    .card-img-top {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: top;
-    }
-  </style>
-
+  <title>NBA Legends Team Builder</title>
+  
 </head>
 <body>
-  <div class="container">
-    <!-- Row to make bootstrap row, justify-content-center to make the cards spaced and centered -->
-    <div class="row justify-content-center" id="js-nba-players"></div>
+
+  <!-- Header Placeholder -->
+  <div id="header"></div>
+
+  <!-- Hero Section -->
+  <div class="hero-section"> <!-- Added hero-section class here -->
+    <div class="hero-content">
+      <h1 class="hero-title">Top 75 Greatest NBA Players of All Time</h1>
+      <p class="hero-subtitle">Create Your Ultimate NBA Team from the Legends</p>
+      <a href="players.html" class="cta-button">Start Building Your Team</a>
+    </div>
   </div>
 
-  <script>
-    let players = [];
+  <!-- About Section -->
+  <div class="background-container">
+    <div class="container">
+      <div class="fl-column">
+        <img class="same-size-image" src="images/michael-jordan-index.jpg" alt="Michael Jordan">
+      </div>
+      <div class="fr-column">
+        <div><h2>About NBA Legends</h2></div>
+        <p class="about-text">NBA Legends is a one-stop destination for basketball enthusiasts who want to explore, compare, and build teams from the top 75 NBA players of all time. Our platform brings the excitement of team-building to your fingertips, allowing you to create the ultimate roster with players from different eras.</p>
+        <a href="/about-us"><button class="learn-more">Learn More</button></a>
+      </div>
+    </div>
 
-    async function loadNBAPlayers() {
-      try {
-        const response = await fetch('/api/players/players');
-        players = await response.json();  // Parse JSON response and assign to players array
-        printPlayers();  // Call printPlayers function after data is loaded
-      } catch (error) {
-        console.error('Error fetching players:', error);
-      }
-    }
+    <!-- Why Choose NBA Legends Section -->
+    <div class="container">
+      <div class="fl-column2">
+        <div><h2>Why Choose NBA Legends?</h2></div>
+        <p><b>Comprehensive Player Database:</b> Explore detailed profiles and stats of all the top 75 NBA players.</p>
+        <p><b>Interactive Team Builder:</b> Create and save your custom teams with ease.</p>
+        <p><b>Engaging User Experience:</b> A fun, easy-to-use platform for basketball fans.</p>
+        <a href="/features"><button class="learn-more">Learn More</button></a>
+      </div>
+      <div class="fr-column2">
+        <div><img class="same-size-image" src="images/lebron-james-index.jpg" alt="LeBron James"></div>
+      </div>
+    </div>
+  </div>
 
-    // Function to print players in top 75 using a traditional for loop to iterate through the array of players objects
-    function printPlayers() {
-      const nbaPlayerElement = document.getElementById('js-nba-players');
-      let nbaPlayerHTML = '';  // Initialize as empty string to accumulate HTML
+  <!-- Achievements Section -->
+  <div class="background-container">
+    <div class="container">
+      <div class="fl-column">
+        <img class="same-size-image" src="images/steph-curry-index.jpg" alt="Steph Curry">
+      </div>
+      <div class="fr-column">
+        <div><h2>Our Achievements</h2></div>
+        <p class="who-we-are">Recognized by fans and basketball communities alike, we are proud to be a trusted source for NBA history, player statistics, and interactive content. Join us in celebrating the legends of the game!</p>
+        <a href="/achievements"><button class="learn-more">Learn More</button></a>
+      </div>
+    </div>
 
-      for (let i = 0; i < players.length; i++) {
-        let threePointPercent;
-        if (players[i].TP === null) {
-          threePointPercent = `Did not exist for players' era`;
-        } else {
-          threePointPercent = players[i].TP;
-        }
+    <!-- Features Section -->
+    <div class="gray-container">
+      <div class="middle">
+        <div><h1>DISCOVER THE POWER OF OUR PLATFORM</h1></div>
+        <div><h3 class="what-we-offer">BRINGING THE BEST OF NBA HISTORY, PLAYER ANALYSIS, AND TEAM BUILDING TO YOU</h3></div>
+      </div>
 
-        let steals;
-        if (players[i].STL === null) {
-          steals = `Record of steals did not exist for players' era`;
-        } else {
-          steals = players[i].STL;
-        }
+      <div class="flex-row2">
+        <div class="flex-column">
+          <p class="para-top">Player Comparisons</p>
+          <img class="pictures" src="images/durant-bird-index.jpg" alt="Player Comparisons">
+          <p class="para-bottom">Analyze and compare stats of legendary NBA players across different eras. Discover who comes out on top in head-to-head matchups and debate with fellow fans!</p>
+          <p class="learn-service"><a href="/features">LEARN MORE</a></p>
+        </div>
 
-        let blocks;
-        if (players[i].BLK === null) {
-          blocks = `Record of blocks did not exist for players' era`;
-        } else {
-          blocks = players[i].BLK;
-        }
+        <div class="flex-column">
+          <p class="para-top">Team Builder</p>
+          <img class="pictures" src="images/build-team-index.jpg" alt="Team Builder">
+          <p class="para-bottom">Create your ultimate NBA dream team by selecting players from various generations. Share your custom rosters with friends and the community to see who builds the best lineup.</p>
+          <p class="learn-service"><a href="/features">LEARN MORE</a></p>
+        </div>
 
-        nbaPlayerHTML += `
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="card h-100 d-flex flex-column">
-              <img class="card-img-top" src="${players[i].img}" alt="Card image cap">
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${players[i].Player}</h5>
-                <p class="card-text">From: ${players[i].start_yr} To: ${players[i].end_yr}</p>
-                <p class="card-text">Points: ${players[i].PTS}</p>
-                <p class="card-text">Rebounds: ${players[i].TRB}</p>
-                <p class="card-text">Assists: ${players[i].AST}</p>
-                <p class="card-text">Steals: ${steals}</p>
-                <p class="card-text">Blocks: ${blocks}</p>
-                <p class="card-text">Field-Goal%: ${(players[i].FG * 100).toFixed(2)}</p>
-                <p class="card-text">3-Point%: ${threePointPercent}</p>
-                <p class="card-text">Free Throw %: ${(players[i].FT * 100).toFixed(2)}</p>
-                <!-- Button with margin-top auto to stay at the bottom -->
-                <a href="#" class="btn btn-primary mt-auto">Add Player To Team</a>
-              </div>
-            </div>
-          </div>
-        `;
-      }
+        <div class="flex-column">
+          <p class="para-top">Historical Insights</p>
+          <img class="pictures" src="images/basketball-history.jpg" alt="Historical Insights">
+          <p class="para-bottom">Explore the rich history of the NBA through in-depth articles, memorable moments, and key player achievements. Perfect for die-hard fans looking to dive deeper into the game.</p>
+          <p class="learn-service"><a href="/features">LEARN MORE</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      nbaPlayerElement.innerHTML = nbaPlayerHTML;  // Append the HTML to the DOM
-    }
+  <!-- Footer -->
+  <div id="footer"></div>
 
-    document.addEventListener('DOMContentLoaded', loadNBAPlayers);  // Load NBA players when DOM is ready
-  </script>
 </body>
 </html>

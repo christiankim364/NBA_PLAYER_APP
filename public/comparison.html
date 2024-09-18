@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Player Comparison</title>
+  <style>
+    table {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    .bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Compare NBA Players</h1>
+
+  <!-- Player Selection Dropdowns -->
+  <label for="player1">Select Player 1:</label>
+  <select id="player1" onchange="comparePlayers()">
+    <option value="">--Select Player 1--</option>
+  </select>
+
+  <label for="player2">Select Player 2:</label>
+  <select id="player2" onchange="comparePlayers()">
+    <option value="">--Select Player 2--</option>
+  </select>
+
+  <!-- Comparison Table -->
+  <table id="comparisonTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Stat</th>
+        <th>Player 1</th>
+        <th>Player 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Points (PTS)</td><td id="pts1"></td><td id="pts2"></td></tr>
+      <tr><td>Rebounds (TRB)</td><td id="trb1"></td><td id="trb2"></td></tr>
+      <tr><td>Assists (AST)</td><td id="ast1"></td><td id="ast2"></td></tr>
+      <tr><td>Steals (STL)</td><td id="stl1"></td><td id="stl2"></td></tr>
+      <tr><td>Blocks (BLK)</td><td id="blk1"></td><td id="blk2"></td></tr>
+      <tr><td>Field Goal % (FG)</td><td id="fg1"></td><td id="fg2"></td></tr>
+      <tr><td>Three-Point % (TP)</td><td id="tp1"></td><td id="tp2"></td></tr>
+      <tr><td>Free Throw % (FT)</td><td id="ft1"></td><td id="ft2"></td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const greatestNBAPlayers = [
+      { id: 1, Player: 'Kareem Abdul-Jabbar', start_year: 1970, end_year: 1989, PTS: 24.6, TRB: 11.2, AST: 3.6, STL: 0.9, BLK: 2.6, FG: 0.559, TP: null, FT: 0.721 },
+      { id: 2, Player: 'Ray Allen', start_year: 1997, end_year: 2014, PTS: 18.9, TRB: 4.1, AST: 3.4, STL: 1.1, BLK: 0.2, FG: 0.452, TP: 0.400, FT: 0.894 },
+      { id: 3, Player: 'Giannis Antetokounmpo', start_year: 2014, end_year: 2024, PTS: 23.4, TRB: 9.8, AST: 4.9, STL: 1.1, BLK: 1.2, FG: 0.545, TP: 0.286, FT: 0.702 },
+      { id: 4, Player: 'Carmelo Anthony', start_year: 2004, end_year: 2022, PTS: 22.5, TRB: 6.2, AST: 2.7, STL: 1.0, BLK: 0.5, FG: 0.447, TP: 0.355, FT: 0.814 },
+      { id: 5, Player: 'Tiny Archibald', start_year: 1971, end_year: 1984, PTS: 18.8, TRB: 2.3, AST: 7.4, STL: 1.1, BLK: 0.1, FG: 0.467, TP: null, FT: 0.810 }
+    ];
+
+    // Populate the dropdowns with player names
+    function populateDropdowns() {
+      const player1Dropdown = document.getElementById('player1');
+      const player2Dropdown = document.getElementById('player2');
+      
+      greatestNBAPlayers.forEach(player => {
+        const option1 = document.createElement('option');
+        option1.value = player.id;
+        option1.textContent = player.Player;
+        player1Dropdown.appendChild(option1);
+        
+        const option2 = document.createElement('option');
+        option2.value = player.id;
+        option2.textContent = player.Player;
+        player2Dropdown.appendChild(option2);
+      });
+    }
+
+    // Compare players based on selection and bold the higher stats
+    function comparePlayers() {
+      const player1Id = document.getElementById('player1').value;
+      const player2Id = document.getElementById('player2').value;
+
+      if (player1Id && player2Id) {
+        const player1 = greatestNBAPlayers.find(p => p.id == player1Id);
+        const player2 = greatestNBAPlayers.find(p => p.id == player2Id);
+
+        compareStat('pts1', 'pts2', player1.PTS, player2.PTS);
+        compareStat('trb1', 'trb2', player1.TRB, player2.TRB);
+        compareStat('ast1', 'ast2', player1.AST, player2.AST);
+        compareStat('stl1', 'stl2', player1.STL ?? 'N/A', player2.STL ?? 'N/A');
+        compareStat('blk1', 'blk2', player1.BLK ?? 'N/A', player2.BLK ?? 'N/A');
+        compareStat('fg1', 'fg2', player1.FG, player2.FG);
+        compareStat('tp1', 'tp2', player1.TP ?? 'N/A', player2.TP ?? 'N/A');
+        compareStat('ft1', 'ft2', player1.FT, player2.FT);
+
+        document.getElementById('comparisonTable').style.display = 'table';
+      }
+    }
+
+    // Function to compare two stats and bold the higher value
+    function compareStat(id1, id2, stat1, stat2) {
+      const element1 = document.getElementById(id1);
+      const element2 = document.getElementById(id2);
+      
+      // Clear any previous bold formatting
+      element1.classList.remove('bold');
+      element2.classList.remove('bold');
+
+      element1.textContent = stat1;
+      element2.textContent = stat2;
+
+      // Apply bold class to the higher stat
+      if (stat1 > stat2) {
+        element1.classList.add('bold');
+      } else if (stat2 > stat1) {
+        element2.classList.add('bold');
+      }
+    }
+
+    // Initialize the dropdowns on page load
+    window.onload = populateDropdowns;
+  </script>
+
+</body>
+</html>
